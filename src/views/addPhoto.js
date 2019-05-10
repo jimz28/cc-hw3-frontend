@@ -2,17 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {} from '../api/photo';
 import axios from 'axios';
-import S3 from 'aws-s3';
  
-// const config = {
-//     bucketName: 'myBucket',
-//     // dirName: 'photos', /* optional */
-//     region: 'us-east-1',
-//     accessKeyId: 'AKIAVMUOUS7R4AFU4Y3S',
-//     secretAccessKey: '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',
-//     s3Url: 'http://s3.amazonaws.com/cloudhw3bucket/', /* optional */
-// }
-
 
 class AddPhoto extends Component {
 //   constructor(props) {
@@ -42,17 +32,6 @@ handleFileChange = async event => {
       imageURL: URL.createObjectURL(file),
       loading: true
     });
-
-    // const S3Client = new S3(config);
-    // /*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
-    
-    // /* This is optional */
-    // const newFileName = fileName;
-    
-    // S3Client
-    //     .uploadFile(file, newFileName)
-    //     .then(data => console.log(data))
-    //     .catch(err => console.error(err))
 
     axios.put(`https://ec83d6qdgc.execute-api.us-east-1.amazonaws.com/stage/upload2/${fileName}`, file, options)
     .then((response) => {
